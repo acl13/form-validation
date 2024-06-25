@@ -36,6 +36,14 @@ input, label, select {
 label {
     margin-top: 1em;
 }
+
+input:invalid {
+    border: 1px solid #f83707;
+}
+
+input:valid {
+    border: 1px solid #74a372;
+}
   
 input[type='submit'] {
     width: 60%; 
