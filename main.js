@@ -4,6 +4,10 @@ const emailError = document.querySelector("#email + span.error");
 const country = document.getElementById('country');
 const zip = document.getElementById('zip');
 const zipError = document.querySelector("#zip + span.error");
+const password = document.getElementById('password');
+const passwordError = document.querySelector("#password + span.error");
+const confirmPassword = document.getElementById('password-confirm');
+const confirmError = document.querySelector("#password-confirm + span.error");
 const submit = document.getElementById('submit');
 
 email.addEventListener("input", () => {
@@ -25,6 +29,24 @@ zip.addEventListener("input", () => {
     }
   });
 
+password.addEventListener("input", () => {
+    if (password.validity.valid) {
+      passwordError.textContent = ""; 
+    } else {
+      showError();
+    }
+}); 
+
+confirmPassword.addEventListener("input", () => {
+    if(confirmPassword.value !== password.value) {
+     confirmError.textContent = 'Passwords must match';
+   } else if (confirmPassword.validity.valid) {
+     confirmError.textContent = ""; 
+   } else {
+     showError();
+   }
+});
+
 submit.addEventListener('click', (event) => {
     event.preventDefault();
     if (!form.checkValidity()) {
@@ -39,5 +61,11 @@ function showError() {
       emailError.textContent = "Entered value needs to be an email address.";
     } else if (zip.validity.valueMissing) {
         zipError.textContent = "Please enter your postal code.";
+    } else if (password.validity.valueMissing) {
+        passwordError.textContent = "Please enter a password.";
+    } else if (password.validity.patternMismatch) {
+        passwordError.textContent = "Make sure your password contains uppercase and lowercase letters, a number, and a special character.";
+    } else if (confirmPassword.validity.valueMissing) {
+        confirmError.textContent = "Please confirm your password.";
     } 
 }
